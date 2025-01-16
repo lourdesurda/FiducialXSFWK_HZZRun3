@@ -18,7 +18,7 @@ from observables import observables
 from binning import binning
 from paths import path
 
-print 'Welcome in RunCoefficients!'
+print ('Welcome in RunCoefficients!')
 
 def parseOptions():
 
@@ -99,7 +99,7 @@ def prepareTrees(year):
             fname = "/eos/cms/store/group/phys_higgs/cmshzz4l/cjlst/RunIII_byZ1Z2/240820/"+year+"/"+signal+"/"+signal+"_reducedTree_MC_"+year+"_skimmed_nnlops.root"
         else:
             fname = "/eos/cms/store/group/phys_higgs/cmshzz4l/cjlst/RunIII_byZ1Z2/240820/"+year+"/"+signal+"/"+signal+"_reducedTree_MC_"+year+"_skimmed_nnlops.root"
-        print fname
+        print (fname)
         d_sig[signal] = uproot.open(fname)[key]
         d_sig_failed[signal] = uproot.open(fname)[key_failed]
 
@@ -281,17 +281,17 @@ def dataframes(year, doubleDiff):
     gen_sig = generators(year)
     xsec_sig = xsecs(year)
     for signal in signals_original:
-        print 'Processing', signal, year
+        print ('Processing', signal, year)
         if doubleDiff:
             d_df_sig[signal] = createDataframe(d_sig[signal],False,gen_sig[signal],xsec_sig[signal],signal,lumi,obs_reco,obs_gen,obs_reco_2nd,obs_gen_2nd)
         else:
             d_df_sig[signal] = createDataframe(d_sig[signal],False,gen_sig[signal],xsec_sig[signal],signal,lumi,obs_reco,obs_gen)
-        print 'Signal created'
+        print ('Signal created')
         if doubleDiff:
             d_df_sig_failed[signal] = createDataframe(d_sig_failed[signal],True,gen_sig[signal],xsec_sig[signal],signal,lumi,obs_reco,obs_gen,obs_reco_2nd,obs_gen_2nd)
         else:
             d_df_sig_failed[signal] = createDataframe(d_sig_failed[signal],True,gen_sig[signal],xsec_sig[signal],signal,lumi,obs_reco,obs_gen)
-        print 'Signal failed created'
+        print ('Signal failed created')
     return d_df_sig, d_df_sig_failed
 
 
@@ -314,7 +314,7 @@ def skim_df(year, doubleDiff):
         else:
             d_skim_sig_failed[signal] = d_df_sig_failed[signal]
     if frames: d_skim_sig_failed['WH1'+signal[len(signal)-2]+signal[len(signal)-1]] = pd.concat(frames)
-    print '%s SKIMMED df CREATED' %year
+    print ('%s SKIMMED df CREATED', %year)
     return d_skim_sig, d_skim_sig_failed
 
 # ------------------------------- FUNCTIONS TO CALCULATE COEFFICIENTS ----------------------------------------------------
